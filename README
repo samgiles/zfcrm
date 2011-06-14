@@ -6,3 +6,8 @@ zfcrm will be a free Customer Relationship Manager created
 using the Zend Framework.  
 
 Please see the ROADMAP for more information.
+
+In order to use this you need at least Zend Framework version 1.11.7
+
+Either copy the Zend library into the main projects library folder or create
+a symlink (on linux use the command: ln -s /path/to/library/Zend /path/to/project/library 
