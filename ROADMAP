@@ -1,0 +1,13 @@
+ROADMAP
+
+Quick outline:   NOTE This is a general and rough guidline, this project is in it's VERY
+                 early stages.
+
+Proposed Modular structure:
+
+Install Module     Handles installation database settings, auth type etc..
+Auth Module        Handle Authentication: LDAP/DBAUTH etc.
+Marketing Module   Handles marketing services.
+Services Module	   Handles customer services.
+Sales Module       Handles Sales services.
+Contacts Module    Handles contact management.
