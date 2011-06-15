@@ -1,0 +1,35 @@
+<table>
+  <tr>
+  	<th></th>
+    <th>Minimum</th>
+    <th>Actual</th>
+  </tr>
+  <tr class="<?php echo ($this->modRewrite ? 'ok' : 'highlight');?>">
+    <td>mod_rewrite enable</td>
+    <td>true</td>
+    <td><?php echo ($this->modRewrite ? 'true' : 'false');?></td>
+  </tr>
+    <tr class="<?php echo ($this->hasZFVersion ? 'ok' : 'highlight');?>">
+    <td>Zend Framework Version</td>
+    <td><?php echo $this->minZF; ?></td>
+    <td><?php echo $this->actualZFVersion; ?></td>
+  </tr>
+  <tr class="<?php echo ($this->hasRequiredPhpVersion ? 'ok' : 'highlight');?>">
+    <td>PHP Version</td>
+    <td><?php echo $this->minPhp; ?></td>
+    <td><?php echo $this->actualPhpVersion; ?></td>
+  </tr>
+  <?php if ($this->requiresJava):?>  
+  <tr class="<?php echo ($this->meetsMinimum ? 'ok' : 'highlight');?>">
+    <td>Java Bridge</td>
+    <td><?php echo $this->minJava; ?></td>
+    <td><?php echo $this->actualJava; ?></td>
+  </tr>
+  <tr class="<?php echo ($this->meetsMinimumJavaVersion ? 'ok' : 'highlight');?>">
+    <td>JRE Version</td>
+    <td><?php echo $this->minJavaVersion; ?></td>
+    <td><?php echo $this->actualJavaVersion; ?></td> <?php // TODO: Add context helps ?>
+  </tr>
+  <?php endif?>
+</table>
+

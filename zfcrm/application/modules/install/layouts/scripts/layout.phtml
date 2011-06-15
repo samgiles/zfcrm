@@ -1,4 +1,5 @@
-<?php $this->doctype() ?>
+
+<?php echo $this->doctype() ?>
 <html>
 <head>
 <?php echo $this->headTitle() ?>
@@ -10,18 +11,6 @@
 <body>
 <?php echo $this->layout()->content; ?>
 
-<?php 
-$file = @file_get_contents("phpi.php");
-
-$start = explode("<h2><a name=\"module_mysql\">mysql</a></h2>",$file,1000);
-if(count($start) < 2){
-echo "MySQL is not on this server.";
-}else{
-$again = explode("<tr><td class=\"e\">Client API version </td><td class=\"v\">",$start[1],1000);
-$last_time = explode(" </td></tr>",$again[1],1000);
-echo "MySQL Version: <b>".$last_time[0]."</b>";
-} 
-?>
 
 </body>
 </html>

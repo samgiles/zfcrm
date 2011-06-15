@@ -6,15 +6,15 @@ class Install_Model_Requirements
 	protected $_requirements;
 	
 	public function __construct(){
-		$this->_requirements = parse_ini('/../configs/reqs.ini');
+		$this->_requirements = parse_ini_file(APPLICATION_PATH . '/modules/install/configs/reqs.ini');
 	}
 	
-	private function getPhpVersion(){
+	public function getPhpVersion(){
 		return phpversion();
 	}
 	
 	public function hasCorrectPhpVersion(){
-		return $this->getRequiredPhpVersion() == $this->getPhpVersion();
+		return (version_compare($this->getPhpVersion(), $this->getRequiredPhpVersion()) >= 0);
 	}
 	
 	public function getRequiredPhpVersion(){
@@ -26,11 +26,15 @@ class Install_Model_Requirements
 	}
 	
 	public function hasZendFrameworkVersion(){
-		return (Zend_Version::compareVersion($this->getRequiredZendFrameworkVersion()) >= 1);
+return (version_compare($this->getZendFrameworkVersion(), $this->getRequiredZendFrameworkVersion()) >= 0);
 	}
 	
 	public function getRequiredZendFrameworkVersion(){
 		return $this->_requirements['zf-version'];
+	}
+	
+	public function getZendFrameworkVersion(){
+		return Zend_Version::VERSION;
 	}
 	
 	public function hasMySQLVersion($host, $username, $password) {
@@ -52,15 +56,15 @@ class Install_Model_Requirements
 	}
 	
 	public function getRequiredJavaVersion(){
-		if (requiresJava()){
+		if ($this->requiresJava()){
 			return $this->_requirements['java-version'];
 		} else {
-			return '0';
+			return false;
 		}
 	}
 	
 	public function hasJavaBridge(){
-		if (requiresJava()){
+		if ($this->requiresJava()){
 			try {
 				$system = new Java("java.lang.System");
 			}catch (Exception $e)
@@ -73,13 +77,22 @@ class Install_Model_Requirements
 	}
 	
 	public function hasRequiredJavaVersion(){
-		if (hasJavaBridge()){
+		if ($this->hasJavaBridge()){
 			$system = new Java("java.lang.System");
 			$version = $system.getProperty("java.version");
 			
 			return (version_compare($version, $this->getRequiredJavaVersion()) >= 0);
 		} else {
 			return false;
+		}
+	}
+	
+	public function getJavaVersion(){
+		if ($this->hasJavaBridge()){
+			$system = new Java("java.lang.System");
+			return $system.getProperty("java.version");
+		} else {
+			return 0;
 		}
 	}
 	
