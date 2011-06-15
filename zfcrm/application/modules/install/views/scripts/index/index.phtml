@@ -2,4 +2,7 @@
 
 <p>This is a nice introduction screen that I haven't taken the time to write yet.</p>
 
-<p><a href="">Lets get started...</a>
+<p><a href="<?php echo $this->url(
+            array('controller'=>'install', 'action' => 'database'),
+            'default',
+            true)?>">Lets get started...</a>
