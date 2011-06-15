@@ -6,7 +6,11 @@ function write_ini_file($assoc_array, $path) {
        if (is_array($item)) {
            $content .= "\n[$key]\n";
            foreach ($item as $key2 => $item2) {
-               $content .= "$key2 = \"$item2\"\n";
+           	   if (is_array($item2) && count($item2) > 0){
+           	   	$content .= $key2 .'[]' . "= \n"; 
+           	   } else {
+                $content .= "$key2 = \"$item2\"\n";
+           	   }
            }       
        } else {
            $content .= "$key = \"$item\"\n";
