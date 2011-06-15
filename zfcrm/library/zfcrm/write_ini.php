@@ -1,43 +1,36 @@
 <?php
 
-function write_ini_file($assoc_arr, $path, $has_sections=FALSE) { 
-    $content = ""; 
-    if ($has_sections) { 
-        foreach ($assoc_arr as $key=>$elem) { 
-            $content .= "[".$key."]\n"; 
-            foreach ($elem as $key2=>$elem2) { 
-                if(is_array($elem2)) 
-                { 
-                    for($i=0;$i<count($elem2);$i++) 
-                    { 
-                        $content .= $key2."[] = \"".$elem2[$i]."\"\n"; 
-                    } 
-                } 
-                else if($elem2=="") $content .= $key2." = \n"; 
-                else $content .= $key2." = \"".$elem2."\"\n"; 
-            } 
-        } 
-    } 
-    else { 
-        foreach ($assoc_arr as $key=>$elem) { 
-            if(is_array($elem)) 
-            { 
-                for($i=0;$i<count($elem);$i++) 
-                { 
-                    $content .= $key."[] = \"".$elem[$i]."\"\n"; 
-                } 
-            } 
-            else if($elem=="") $content .= $key." = \n"; 
-            else $content .= $key." = \"".$elem."\"\n"; 
-        } 
-    } 
+function write_ini_file($assoc_array, $path) {
+	$content = '';
+   foreach ($assoc_array as $key => $item) {
+       if (is_array($item)) {
+           $content .= "\n[$key]\n";
+           foreach ($item as $key2 => $item2) {
+               $content .= "$key2 = \"$item2\"\n";
+           }       
+       } else {
+           $content .= "$key = \"$item\"\n";
+       }
+   }       
+  
+   if (!$handle = fopen($path, 'w')) {
+       return false;
+   }
+   if (!fwrite($handle, $content)) {
+       return false;
+   }
+   fclose($handle);
+   return true;
+}
 
-    if (!$handle = fopen($path, 'w')) { 
-        return false; 
-    } 
-    if (!fwrite($handle, $content)) { 
-        return false; 
-    } 
-    fclose($handle); 
-    return true; 
+function append_to_application_config($section, $array){
+	    $ini = parse_ini_file(APPLICATION_PATH . '/configs/application.ini', true);
+
+    	$ini[$section] = array_merge($ini[$section], $array);
+
+    	echo '<pre>';
+    	print_r($ini);
+    	echo '</pre>';
+    	
+    	write_ini_file($ini, APPLICATION_PATH . '/configs/application.ini');   	
 }

@@ -34,6 +34,8 @@ class Install_RequirementsController extends Zend_Controller_Action
         $this->view->actualJavaVersion = $requirements->getJavaVersion();
         $this->view->meetsMinimumJavaVersion = $requirements->hasRequiredJavaVersion();
       	
+        $this->view->pdoEnabled = $requirements->hasPDOEnabled();
+        
         $this->view->headLink()->appendStylesheet('/css/install/styles.css');
         
         
@@ -41,4 +43,8 @@ class Install_RequirementsController extends Zend_Controller_Action
 
 
 }
+
+     
+
+
 

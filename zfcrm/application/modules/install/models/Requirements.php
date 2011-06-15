@@ -37,6 +37,23 @@ return (version_compare($this->getZendFrameworkVersion(), $this->getRequiredZend
 		return Zend_Version::VERSION;
 	}
 	
+	public function hasPDOEnabled(){
+		return in_array('PDO', get_loaded_extensions());
+	}
+	
+	public function getAvailablePDODrivers(){
+		$array = array();
+		
+		foreach (get_loaded_extensions() as $key => $value){
+			if (strpos($value, 'pdo_') !== false){
+				$array[$value] = str_replace('pdo_', '', $value); 
+			}
+		}
+		
+		return $array;
+		
+	}
+	
 	public function hasMySQLVersion($host, $username, $password) {
 		$conn = mysql_pconnect($host, $username, $password);
 		$mysqlVersion = preg_replace('#[^0-9\.]#', '', mysql_get_server_info());

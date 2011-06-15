@@ -13,6 +13,9 @@
           <actionMethod actionName="requirements"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Database">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
@@ -29,8 +32,13 @@
             <controllerFile controllerName="Requirements">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Database">
+              <actionMethod actionName="index"/>
+            </controllerFile>
           </controllersDirectory>
-          <formsDirectory enabled="false"/>
+          <formsDirectory>
+            <formFile formName="Database"/>
+          </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
             <modelFile modelName="Requirements"/>
@@ -44,6 +52,9 @@
                 <viewScriptFile forActionName="requirements"/>
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Requirements">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Database">
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
@@ -62,6 +73,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="requirements"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Database">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
